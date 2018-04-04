@@ -22,6 +22,7 @@ TARGET_CPU_VARIANT := krait
 
 TARGET_NO_BOOTLOADER := true
 
+BOARD_KERNEL_IMAGE_NAME := zImage-dtb
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 
@@ -95,12 +96,6 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 13725837312
 BOARD_CACHEIMAGE_PARTITION_SIZE := 734003200
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 131072
-
-
-ifneq ($(filter hammerhead_fp aosp_hammerhead_fp,$(TARGET_PRODUCT)),)
-BOARD_HAS_FINGERPRINT_FPC := true
-endif
-
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
 TARGET_RECOVERY_FSTAB = device/lge/hammerhead/fstab.hammerhead
@@ -111,17 +106,6 @@ BOARD_HAL_STATIC_LIBRARIES := libdumpstate.hammerhead
 
 BOARD_SEPOLICY_DIRS += device/lge/hammerhead/sepolicy
 
-ifneq ($(filter hammerhead_fp aosp_hammerhead_fp,$(TARGET_PRODUCT)),)
-BOARD_SEPOLICY_DIRS += \
-       device/lge/hammerhead/sepolicy-hammerhead_fp
-
-# The list below is order dependent
-BOARD_SEPOLICY_UNION += \
-       device.te \
-       system_server.te \
-       file_contexts
-endif
-
 HAVE_ADRENO_SOURCE:= false
 
 OVERRIDE_RS_DRIVER:= libRSDriver_adreno.so
@@ -131,11 +115,6 @@ TARGET_TOUCHBOOST_FREQUENCY:= 1200
 
 USE_DEVICE_SPECIFIC_QCOM_PROPRIETARY:= true
 USE_DEVICE_SPECIFIC_CAMERA:= true
-
-ifeq ($(USE_SVELTE_KERNEL),true)
-MALLOC_SVELTE := true
-endif
-
 USE_CLANG_PLATFORM_BUILD := true
 
 -include vendor/lge/hammerhead/BoardConfigVendor.mk
