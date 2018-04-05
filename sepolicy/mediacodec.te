@@ -1,0 +1,2 @@
+# Mediacodec is expected to get attributes from /vendor
+allow mediacodec rootfs:lnk_file getattr;

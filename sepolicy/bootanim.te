@@ -1,1 +1,3 @@
+# Boot animation requires some additional rights
 allow bootanim sysfs_thermal:file r_file_perms;
+allow bootanim rootfs:lnk_file getattr;

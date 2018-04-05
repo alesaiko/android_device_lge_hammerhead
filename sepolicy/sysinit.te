@@ -1,0 +1,2 @@
+# Sysinit is expected to get attributes from /vendor
+allow sysinit rootfs:lnk_file getattr;

@@ -21,6 +21,7 @@ allow mpdecision mpdecision_socket:sock_file create_file_perms;
 type_transition mpdecision socket_device:sock_file mpdecision_socket;
 allow mpdecision self:capability chown;
 allow mpdecision socket_device:dir w_dir_perms;
+allow mpdecision socket_device:sock_file create_file_perms;
 
 # By-product of setting owner on sock_file (don't allow)
 dontaudit mpdecision self:capability fsetid;
@@ -37,10 +38,22 @@ allow mpdecision sysfs_mpdecision:file rw_file_perms;
 # /sys/devices/system/cpu/cpu1/cpufreq/cpuinfo_min_freq
 # /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
 allow mpdecision sysfs:file write;
+allow mpdecision sysfs_usb:file write;
 
 # This is needed to allow mpdecision to look at system_server's
 # /proc/PID/status file.
 r_dir_file(mpdecision, system_server)
 r_dir_file(mpdecision, mediaserver)
+r_dir_file(mpdecision, audioserver)
+
+allow mpdecision cameraserver:dir search;
+allow mpdecision cameraserver:file { read open };
 
 allow mpdecision self:capability sys_nice;
+
+allow mpdecision power_control_device:chr_file rw_file_perms;
+allow mpdecision system_data_file:dir rw_dir_perms;
+allow mpdecision system_data_file:file r_file_perms;
+
+allow mpdecision cameraserver:dir search;
+allow mpdecision cameraserver:file { read open };

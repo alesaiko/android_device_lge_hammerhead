@@ -1,0 +1,2 @@
+# Net daemon requires a permission to find data
+allow system_app netd_service:service_manager find;

@@ -1,0 +1,2 @@
+# Bootstat is expected to get attributes from /vendor
+allow bootstat rootfs:lnk_file getattr;
