@@ -40,6 +40,9 @@ on early-boot
     setrlimit 8 67108864 67108864
 
 on boot
+    # Remove /dev/diag debugging directory
+    rm /dev/diag
+
     # Bluetooth
     chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
